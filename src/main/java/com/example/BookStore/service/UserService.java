@@ -54,18 +54,18 @@ public class UserService implements UserInterface {
         return userRepository.save(user);
     }
 
-    @Override
-    public void saveUser(UserEntity user) {
-        userRepository.save(user);
-    }
-
-    @Override
-    public UserEntity getUserByEmailAndPassword(String email, String password) throws UserException {
-        UserEntity user = userRepository.findByEmailAndPassword(email, password);
-        if (user == null) {
-            throw new UserException("Invalid id and password");
-        }
-        return user;
-    }
+//    @Override
+//    public void saveUser(UserEntity user) {
+//        userRepository.save(user);
+//    }
+//
+//    @Override
+//    public UserEntity getUserByEmailAndPassword(String email, String password) throws UserException {
+//        UserEntity user = userRepository.findByEmailAndPassword(email, password);
+//        if (user == null) {
+//            throw new UserException("Invalid id and password");
+//        }
+//        return user;
+//    }
 }
 

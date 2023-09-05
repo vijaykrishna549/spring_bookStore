@@ -3,10 +3,8 @@ package com.example.BookStore.controller;
 import com.example.BookStore.dao.UserDao;
 import com.example.BookStore.dto.ResponseDTO;
 import com.example.BookStore.entity.UserEntity;
-import com.example.BookStore.exception.UserException;
 import com.example.BookStore.repository.UserRepository;
 import com.example.BookStore.service.UserService;
-import com.example.BookStore.service.jwtGenerator.JwtGeneratorInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +25,8 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @Autowired(required = false)
-    JwtGeneratorInterface jwtGeneratorInterface;
+//    @Autowired
+//    JwtGeneratorInterface jwtGeneratorInterface;
 
     //      if (StringUtils.isBlank(book.getTitle())) {
 //            throw new ValidationError("Title cannot be empty");
@@ -72,28 +70,28 @@ public class UserController {
     }
 
 
-    @PostMapping("/register")
-    public ResponseEntity<?> postUser(@RequestBody UserEntity user){
-        try{
-            userService.saveUser(user);
-            return new ResponseEntity<>(user, HttpStatus.CREATED);
-        } catch (Exception e){
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
-        }
-    }
-    @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody UserEntity user) {
-        try {
-            if(user.getEmail() == null || user.getPassword() == null) {
-                throw new UserException("UserName or Password is Empty");
-            }
-            UserEntity userData = userService.getUserByEmailAndPassword(user.getEmail(), user.getPassword());
-            if(userData == null){
-                throw new UserException("UserName or Password is Invalid");
-            }
-            return new ResponseEntity<>(jwtGeneratorInterface.generateToken(user), HttpStatus.OK);
-        } catch (UserException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
-        }
-    }
+//    @PostMapping("/register")
+//    public ResponseEntity<?> postUser(@RequestBody UserEntity user){
+//        try{
+//            userService.saveUser(user);
+//            return new ResponseEntity<>(user, HttpStatus.CREATED);
+//        } catch (Exception e){
+//            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+//        }
+//    }
+//    @PostMapping("/login")
+//    public ResponseEntity<?> loginUser(@RequestBody UserEntity user) {
+//        try {
+//            if(user.getEmail() == null || user.getPassword() == null) {
+//                throw new UserException("UserName or Password is Empty");
+//            }
+//            UserEntity userData = userService.getUserByEmailAndPassword(user.getEmail(), user.getPassword());
+//            if(userData == null){
+//                throw new UserException("UserName or Password is Invalid");
+//            }
+//            return new ResponseEntity<>(jwtGeneratorInterface.generateToken(user), HttpStatus.OK);
+//        } catch (UserException e) {
+//            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+//        }
+//    }
 }
