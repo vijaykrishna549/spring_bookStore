@@ -2,7 +2,6 @@ package com.example.BookStore.controller;
 
 import com.example.BookStore.entity.User;
 import com.example.BookStore.exception.UserException;
-import com.example.BookStore.repository.UserRepository;
 import com.example.BookStore.service.JwtGeneratorInterface;
 import com.example.BookStore.service.LoginUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +13,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/v1/user")
+@RequestMapping("/user")
 public class JwUserController {
 
+    private LoginUserService userService;
+//
+//    @Autowired
+//    UserRepository userRepository;
 
     @Autowired
-    UserRepository userRepository;
-
-    @Autowired(required = false)
     JwtGeneratorInterface jwtGeneratorInterface;
-
     @Autowired
-    LoginUserService userService;
+    public JwUserController(LoginUserService userService){
+        this.userService=userService;
+        //  this.jwtGenerator=jwtGenerator;
+    }
+
+//    @Autowired
+//    LoginUserService userService;
 
 
     @PostMapping("/register")

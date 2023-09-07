@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LoginUserService implements LogingUserServiceInterface {
-    private
+
     @Autowired
-    LoginUserRepository userRepository;
+    private LoginUserRepository userRepository;
 
     @Override
     public void saveUser(User user) {
